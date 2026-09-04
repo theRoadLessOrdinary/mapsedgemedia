@@ -1,0 +1,399 @@
+/* Adapted from the original admin/vantage-dashboard/css/template.css,
+   trimmed to what this static snapshot needs and made self-contained
+   (no external font/icon CDN dependencies). */
+
+/* Border colors below were darkened to hit >=8:1 contrast against the
+   background each border sits on (computed via WCAG relative luminance,
+   not eyeballed). One exception: .lenderRestrictionHeading's border sits
+   on a saturated mid-tone red (#e05656) fill, whose max possible contrast
+   against ANY color (black or white) is ~5.6:1 — 8:1 is not mathematically
+   reachable there without also changing the fill color, so it's set to
+   solid black (#000), the best achievable value. */
+
+:root {
+	--box-shadow: 0 2px 8px rgba(0,0,0,.25);
+	--toolbar-background: #dfe7ee;
+
+	/* Colors reused across three or more rules. */
+	--color-white: #fff;
+	--color-black: #000;
+	--border-dark: #A1A1A1;
+	--color-text-muted: #555;
+	--color-text-meta: #666;
+	--color-maroon: #800;
+	--color-border-structural: #8888AA;
+
+	/* Corner radii reused across multiple rules. */
+	--radius-sm: .3rem;
+	--radius-md: .4rem;
+
+	/* Spacing scale: every margin/padding value below is the doubled,
+	   rem-based original, snapped to the nearest of these 8 steps to
+	   keep the number of unique spacing values small. */
+	--space-1: .25rem;
+	--space-2: .5rem;
+	--space-3: .75rem;
+	--space-4: 1rem;
+	--space-5: 1.5rem;
+	--space-6: 2rem;
+	--space-7: 2.5rem;
+	--space-8: 3.25rem;
+	--h1-dark: #338;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: 'tahoma ms', arial, sans-serif;
+	font-size: 16px;
+}
+
+body {
+	margin: 0;
+	background: #f4f6f8;
+}
+
+.headingLeft {
+	color: var(--color-maroon);
+	font-weight: bold;
+	font-size: .8em;
+}
+
+/* ---------- search panel ---------- */
+
+#searchFormContainer {
+	background: var(--color-white);
+	border: 1px solid var(--color-border-structural);
+	border-radius: var(--radius-md);
+	padding: 1rem;
+	margin: 1rem 1rem var(--space-7) 1rem;
+	box-shadow: var(--box-shadow);
+}
+
+#tblDashboardSearch {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#tblDashboardSearch td {
+	font-size: .8em;
+	vertical-align: top;
+	padding: var(--space-3);
+}
+
+#tblDashboardSearch td.bordered {
+	border: 1px solid var(--border-dark);
+	background: #efefef;
+}
+
+#tblDashboardSearch td.searchTableLabel {
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+#tblDashboardSearch td.borderedGreen {
+	border: 1px solid #0f3d0f;
+	background: #cfffcf;
+	text-align: center;
+}
+
+#tblDashboardSearch select,
+#tblDashboardSearch input[type=text],
+#tblDashboardSearch input[type=date] {
+	padding: var(--space-2) var(--space-3);
+	background-color: var(--color-white);
+	border-radius: var(--radius-sm);
+	border: 1px solid var(--border-dark);
+	outline: 0;
+	width: 100%;
+}
+
+.pseudo-select {
+	display: inline-block;
+	background: #FFF;
+	border: 1px solid var(--border-dark);
+	border-radius: 4px;
+	padding: var(--space-1) var(--space-4);
+	margin: 0 var(--space-4) var(--space-2) 0;
+	font-size: .85rem;
+}
+
+.chkOption {
+	display: inline-block;
+	margin-right: var(--space-7);
+}
+
+.chkOption label {
+	margin-left: var(--space-2);
+}
+
+#tdDashboardSearchButtons {
+	text-align: center;
+}
+
+.btnDashboardSearch {
+	display: inline-block;
+	background: var(--color-white);
+	border: 1px solid var(--border-dark);
+	border-radius: var(--radius-md);
+	padding: var(--space-3) var(--space-7);
+	font-size: 1rem;
+	font-weight: bold;
+	box-shadow: var(--box-shadow);
+	cursor: default;
+}
+
+.searchRowFlex {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-3);
+	align-items: flex-end;
+}
+
+.searchRowFlex .field {
+	display: flex;
+	flex-direction: column;
+	font-size: .8em;
+	min-width: 140px;
+}
+
+.fieldLabel {
+	display: block;
+	font-weight: bold;
+	white-space: nowrap;
+	margin-bottom: var(--space-1);
+}
+
+.fieldLabel.inlineLabel {
+	display: inline;
+	margin-bottom: 0;
+}
+
+#tblDashboardSearch .inlineControl,
+#tblDashboardSearch input.inlineControl {
+	width: auto;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.smallLink {
+	font-size: .9em;
+}
+
+/* ---------- results ---------- */
+
+#outputTable {
+	background: var(--color-white);
+	border: 1px solid var(--color-border-structural);
+	border-radius: var(--radius-md);
+	box-shadow: var(--box-shadow);
+	overflow-x: auto;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+table.searchResultsOutput {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table#tblsearchResultsHeader {
+	background: var(--toolbar-background);
+}
+
+table.searchResultsOutput > tbody > tr > td {
+	border: 1px solid var(--border-dark);
+	vertical-align: top;
+	padding: var(--space-4);
+}
+
+.trDashboardResults:nth-child(even) {
+	background: #fafbfc;
+}
+
+.trDashboardResults:hover {
+	background: #fff8e1;
+}
+
+div.col1 { width: 100px; }
+div.col2 { width: 170px; position: relative; }
+div.col3 { width: 190px; }
+div.col4 { width: 170px; }
+div.col5 { width: 130px; }
+div.col6 { width: 200px; }
+div.col7 { width: 130px; }
+div.col8 { width: 110px; }
+
+.dashboardLink {
+	display: inline-block;
+	color: #00c;
+	text-decoration: none;
+	font-size: 1.05em;
+}
+
+.dashboardLink:hover {
+	text-decoration: underline;
+}
+
+.color_flag {
+	position: absolute;
+	top: .3rem;
+	right: .3rem;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	border: 1px solid var(--color-black);
+}
+.color_flag[color="red"] { background: #e05656; }
+.color_flag[color="yellow"] { background: #e8c94a; }
+.color_flag[color="green"] { background: #58b368; }
+.color_flag[color="none"] { background: transparent; border-color: transparent; }
+
+.dealerContactName {
+	color: var(--color-text-muted);
+	margin-top: var(--space-2);
+	font-size: .95em;
+}
+
+div.statusPercents {
+	height: 6px;
+	border-radius: 3px;
+	margin-bottom: var(--space-3);
+}
+div.statusPercents.unknown {
+	background: repeating-linear-gradient(45deg, #ffffff, #ffffff 5px, #eeeeee 5px, #eeeeee 10px);
+	border: 1px solid var(--border-dark);
+}
+div.statusPercents.green  { background-color: #95ff95; }
+div.statusPercents.yellow { background-color: #ffe45e; }
+div.statusPercents.red    { background-color: #ff7a7a; }
+
+.buyerAddress, .dealerAddress {
+	color: var(--color-text-muted);
+	font-size: .92em;
+	margin-top: var(--space-1);
+}
+
+.creditAppStatus {
+	display: inline-block;
+	font-weight: bold;
+	padding: var(--space-1) var(--space-4);
+	border-radius: var(--radius-sm);
+	font-size: .85em;
+	margin-bottom: var(--space-2);
+}
+.creditAppStatus.approved  { background: #d7f7d7; color: #1a6b1a; }
+.creditAppStatus.declined  { background: #ffd9d9; color: #8a1a1a; }
+.creditAppStatus.pending   { background: #fff3cf; color: #7a5b00; }
+.creditAppStatus.submitted { background: #dbe9ff; color: #1a3f8a; }
+
+.tdresultsLabel {
+	font-weight: bold;
+	color: var(--color-text-muted);
+	font-size: .85em;
+}
+
+.lenderRestrictionHeading {
+	color: var(--color-white);
+	background-color: #e05656;
+	border: 1px solid var(--color-black);
+	padding: var(--space-3);
+	text-align: center;
+	font-weight: bold;
+	border-radius: var(--radius-sm);
+	margin: var(--space-5) 0 var(--space-3) 0;
+}
+
+.dealLinks {
+	list-style: none;
+	margin: var(--space-3) 0 0 0;
+	padding: 0;
+}
+.dealLinks li {
+	line-height: 1.8;
+}
+
+.iddeal {
+	color: #888;
+	font-size: .85em;
+	margin-top: var(--space-3);
+}
+
+.ctxItemComplete {
+	display: inline-block;
+	background: #eef7ee;
+	border: 1px solid #123312;
+	color: #275c27;
+	border-radius: var(--radius-sm);
+	padding: var(--space-1) var(--space-4);
+	font-size: .78em;
+	margin: var(--space-1) var(--space-2) var(--space-1) 0;
+}
+
+.btnExpedite {
+	display: inline-block;
+	font-size: .78em;
+	border-radius: 10px;
+	background: linear-gradient(to bottom, #f85032 0%, #f16f5c 50%, #f02f17 100%);
+	padding: var(--space-2) var(--space-4);
+	color: var(--color-white);
+	font-weight: bold;
+	text-decoration: none;
+	margin-top: var(--space-2);
+}
+
+.recordMeta {
+	font-size: .85em;
+	color: var(--color-text-meta);
+}
+
+.notesLink, .docLink, .runCreditLink a, .editLink, .breakdownLink {
+	display: block;
+	margin-top: var(--space-3);
+	font-size: .92em;
+}
+
+/* ---------- paging ---------- */
+
+#tblPaging {
+	width: 100%;
+	margin-top: var(--space-5);
+}
+
+#tblPaging td.paging-cell {
+	font-size: .85em;
+	color: #444;
+}
+
+.prev-button { text-align: left; }
+.page-count { text-align: center; }
+.total-records { text-align: center; }
+.next-btn { text-align: right; }
+
+.paging-btn {
+	display: inline-block;
+	padding: var(--space-1) var(--space-4);
+	border: 1px solid var(--border-dark);
+	border-radius: var(--radius-sm);
+	background: var(--color-white);
+	text-decoration: none;
+	color: #222;
+}
+
+h1.pageTitle {
+	font-size: 1.1rem;
+	margin: 0 0 var(--space-6) 0;
+	color: white;
+	background: linear-gradient(to bottom, #00a, #003);
+	opacity: .8;
+	padding: 1rem;
+}
+
+.snapshot-note {
+	background: #fff8d8;
+	border: 1px solid #332b00;
+	color: #6b5c00;
+	padding: var(--space-4) var(--space-5);
+	border-radius: var(--radius-sm);
+	font-size: .82em;
+	margin-bottom: var(--space-6);
+}

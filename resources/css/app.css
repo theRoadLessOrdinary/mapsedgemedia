@@ -35,4 +35,9 @@
     a:active {
         color: #830;
     }
+
+    .shadowed-image {
+        box-shadow: 8px 12px 12px #00000055;
+        border: 1px solid #00000066;
+    }
 }
