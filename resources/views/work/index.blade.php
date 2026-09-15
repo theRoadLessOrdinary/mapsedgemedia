@@ -9,11 +9,6 @@
         <h1 class="mt-2 text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900">
             Case studies
         </h1>
-        <p class="mt-6 text-slate-700 leading-relaxed max-w-xl">
-            Problem, process, and reasoning behind the work &mdash; not just final screens.
-            {# This grid is still filling in; entries marked "Coming soon" are placeholders
-            standing in for future case studies. #}
-        </p>
     </section>
 
     <section class="max-w-5xl mx-auto px-6 mt-10 pb-24">
@@ -28,9 +23,9 @@
                             </span>
                         </div>
                         <p class="mt-3 text-sm text-slate-500 leading-relaxed">{{ $cs['summary'] }}</p>
-                        <ul class="mt-4 flex flex-wrap gap-2">
+                        <ul class="mt-6 flex flex-wrap list-none gap-2">
                             @foreach ($cs['tags'] as $tag)
-                                <li class="px-2.5 py-1 rounded-full text-xs text-slate-500 border border-slate-300">{{ $tag }}</li>
+                                <li class="px-2.5 py-1 rounded-full text-xs leading-tight text-slate-500 border border-slate-700">{{ $tag }}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -39,9 +34,9 @@
                        class="group p-6 rounded-lg border border-slate-200 hover:border-indigo-800 transition-colors">
                         <h2 class="font-semibold text-slate-900 group-hover:text-indigo-800">{{ $cs['title'] }}</h2>
                         <p class="mt-3 text-sm text-slate-700 leading-relaxed">{{ $cs['summary'] }}</p>
-                        <ul class="mt-4 flex flex-wrap gap-2">
+                        <ul class="mt-4 flex flex-wrap list-none gap-2">
                             @foreach ($cs['tags'] as $tag)
-                                <li class="px-2.5 py-1 rounded-full text-xs text-slate-700 border border-slate-200">{{ $tag }}</li>
+                                <li class="px-2.5 py-1 rounded-full text-xs leading-tight text-slate-700 border border-slate-700">{{ $tag }}</li>
                             @endforeach
                         </ul>
                         <p class="mt-4 text-sm font-medium text-indigo-800 group-hover:underline">Read case study &rarr;</p>

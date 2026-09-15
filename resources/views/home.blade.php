@@ -9,7 +9,7 @@
             <div>
                 <p class="text-sm font-medium text-indigo-800 mb-4">UI/UX &amp; Full-Stack Developer</p>
                 <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900 max-w-2xl">
-                    I design and build software people actually enjoy using.
+                    I design and build software that does the job and stays out of the way.
                 </h1>
                 <p class="mt-6 text-lg text-slate-700 max-w-xl leading-relaxed">
                     Over 20 years turning legacy systems and rough ideas into interfaces that are clear,

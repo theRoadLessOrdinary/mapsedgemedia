@@ -29,25 +29,11 @@ class WorkController extends Controller
                 'placeholder' => false,
             ],
             [
-                'slug' => null,
-                'title' => 'Lorem Ipsum Dolor Sit Amet',
-                'summary' => 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                'tags' => ['Lorem', 'Ipsum'],
-                'placeholder' => true,
-            ],
-            [
-                'slug' => null,
-                'title' => 'Ut Enim Ad Minim Veniam',
-                'summary' => 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                'tags' => ['Dolor', 'Sit Amet'],
-                'placeholder' => true,
-            ],
-            [
-                'slug' => null,
-                'title' => 'Duis Aute Irure Dolor',
-                'summary' => 'In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-                'tags' => ['Consectetur'],
-                'placeholder' => true,
+                'slug' => 'ruco-printing',
+                'title' => 'RUCO Products, Inc.: Retiring an ActiveX Print Dependency',
+                'summary' => 'Removing a browser-deprecation time bomb from the whole app in one deploy, with no page-by-page rewrite.',
+                'tags' => ['Legacy browser dependency', 'JavaScript', 'ClassicASP'],
+                'placeholder' => false,
             ],
         ];
     }
