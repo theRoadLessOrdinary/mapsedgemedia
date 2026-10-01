@@ -69,8 +69,10 @@ prove what's in the *local* write cache, not what's on HelioHost.
 
 `deploy/deploy.sh` has since been rewritten to talk to the `heliohost:`
 rclone remote directly (`rclone sync`/`copyto`) instead of writing through
-`~/helio`, and it verifies file counts/sizes against the backend
-afterward. Anything done by hand outside of `deploy.sh` (`.env`, the
+`~/helio`, and it verifies against the backend afterward: it reports file
+counts/sizes (informational only) and confirms `index.php` and
+`vendor/autoload.php` landed, retrying each check up to 3 times because
+HelioHost's FTP regularly drops connections mid-listing. Anything done by hand outside of `deploy.sh` (`.env`, the
 database file, one-off scripts) should follow the same rule, use `rclone`
 directly against the backend, never `~/helio`:
 

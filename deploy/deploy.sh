@@ -83,15 +83,36 @@ rclone sync "$PROJECT_ROOT/public/" "$WEB_REMOTE" \
 rclone copyto "$PROJECT_ROOT/deploy/index.production.php" "$WEB_REMOTE/index.php"
 
 echo "==> Verifying against the real backend"
-APP_COUNT_SIZE="$(rclone size "$APP_REMOTE" --json)"
-WEB_COUNT_SIZE="$(rclone size "$WEB_REMOTE" --json)"
+# HelioHost's FTP regularly drops connections mid-listing, so each check is
+# retried before it counts as a failure. A timeout here does not mean the
+# upload failed (seen 2026-10-01: sync succeeded, size check timed out).
+retry() {
+    local attempt
+    for attempt in 1 2 3; do
+        if "$@"; then return 0; fi
+        [ "$attempt" -lt 3 ] || break
+        echo "    (attempt $attempt failed, retrying in $((attempt * 10))s)" >&2
+        sleep $((attempt * 10))
+    done
+    return 1
+}
+
+# rclone's own FTP timeouts default to minutes, long enough for one stalled
+# listing to hang the whole deploy, so every call below is capped with
+# `timeout`. Sizes are informational only: one try each, and a failure here
+# doesn't fail the deploy.
+APP_COUNT_SIZE="$(timeout 120 rclone size "$APP_REMOTE" --contimeout 30s --timeout 60s --json || echo 'unavailable (listing failed)')"
+WEB_COUNT_SIZE="$(timeout 120 rclone size "$WEB_REMOTE" --contimeout 30s --timeout 60s --json || echo 'unavailable (listing failed)')"
 echo "    $APP_REMOTE: $APP_COUNT_SIZE"
 echo "    $WEB_REMOTE: $WEB_COUNT_SIZE"
-if ! rclone lsf "$WEB_REMOTE" | grep -qx 'index.php'; then
+
+# The two files the site can't run without. Checked by exact path rather
+# than by listing whole directories, which is where the timeouts happen.
+if ! retry timeout 90 rclone lsl "$WEB_REMOTE/index.php" --contimeout 30s --timeout 60s >/dev/null; then
     echo "ERROR: index.php did not land in $WEB_REMOTE, deploy did not actually complete." >&2
     exit 1
 fi
-if ! rclone lsf "$APP_REMOTE/vendor" | grep -qx 'autoload.php'; then
+if ! retry timeout 90 rclone lsl "$APP_REMOTE/vendor/autoload.php" --contimeout 30s --timeout 60s >/dev/null; then
     echo "ERROR: vendor/autoload.php did not land in $APP_REMOTE, deploy did not actually complete." >&2
     exit 1
 fi
