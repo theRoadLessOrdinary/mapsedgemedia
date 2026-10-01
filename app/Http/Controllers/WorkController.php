@@ -8,7 +8,7 @@ class WorkController extends Controller
 {
     /**
      * Case study index data. Each non-placeholder entry's `slug` must have
-     * a matching resources/views/work/{slug}.blade.php detail template —
+     * a matching resources/views/work/{slug}.blade.php detail template,
      * show() resolves the view from the slug directly.
      */
     protected static function caseStudies(): array

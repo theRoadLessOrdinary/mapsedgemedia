@@ -6,7 +6,7 @@
    background each border sits on (computed via WCAG relative luminance,
    not eyeballed). One exception: .lenderRestrictionHeading's border sits
    on a saturated mid-tone red (#e05656) fill, whose max possible contrast
-   against ANY color (black or white) is ~5.6:1 — 8:1 is not mathematically
+   against ANY color (black or white) is ~5.6:1, 8:1 is not mathematically
    reachable there without also changing the fill color, so it's set to
    solid black (#000), the best achievable value. */
 

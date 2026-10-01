@@ -20,7 +20,7 @@
             </div>
             <div>
                 <dt class="text-slate-500 uppercase tracking-wide text-xs">Timeline</dt>
-                <dd class="mt-1 text-slate-900 font-medium">1 Week</dd>
+                <dd class="mt-1 text-slate-900 font-medium">Oct 2025 - Jun 2026</dd>
             </div>
             <div>
                 <dt class="text-slate-500 uppercase tracking-wide text-xs">Team</dt>

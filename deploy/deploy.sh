@@ -7,7 +7,7 @@
 # What it does:
 #   1. Builds front-end assets locally (npm run build).
 #   2. Builds a clean, production-only copy of the app (composer install
-#      --no-dev) in a scratch directory — never touches your local dev
+#      --no-dev) in a scratch directory, never touches your local dev
 #      vendor/.
 #   3. Syncs that app copy to heliohost:mapsedgemedia-app/ (NOT web-
 #      accessible) via `rclone sync` directly against the FTP backend.
@@ -15,7 +15,7 @@
 #      actual docroot) the same way, swapping in
 #      deploy/index.production.php as index.php.
 #   5. Verifies both syncs actually landed by checking file counts/sizes
-#      against the backend afterward — NOT by reading anything back
+#      against the backend afterward, NOT by reading anything back
 #      through the ~/helio mount, which has been observed to silently
 #      accept writes that never reach the real server (see deploy/README.md
 #      for the full story). Every step below talks to the `heliohost:`
@@ -23,7 +23,7 @@
 #
 # What it deliberately does NOT do:
 #   - Touch .env in either location. On first deploy, create it by hand
-#     and push it with `rclone copyto` (see deploy/README.md) — never
+#     and push it with `rclone copyto` (see deploy/README.md), never
 #     overwrite it automatically, since it holds APP_KEY/DB config that
 #     must persist across deploys.
 #   - Touch database/database.sqlite in the app dir, for the same reason.
@@ -88,11 +88,11 @@ WEB_COUNT_SIZE="$(rclone size "$WEB_REMOTE" --json)"
 echo "    $APP_REMOTE: $APP_COUNT_SIZE"
 echo "    $WEB_REMOTE: $WEB_COUNT_SIZE"
 if ! rclone lsf "$WEB_REMOTE" | grep -qx 'index.php'; then
-    echo "ERROR: index.php did not land in $WEB_REMOTE — deploy did not actually complete." >&2
+    echo "ERROR: index.php did not land in $WEB_REMOTE, deploy did not actually complete." >&2
     exit 1
 fi
 if ! rclone lsf "$APP_REMOTE/vendor" | grep -qx 'autoload.php'; then
-    echo "ERROR: vendor/autoload.php did not land in $APP_REMOTE — deploy did not actually complete." >&2
+    echo "ERROR: vendor/autoload.php did not land in $APP_REMOTE, deploy did not actually complete." >&2
     exit 1
 fi
 
@@ -101,5 +101,5 @@ echo "    If this is the first deploy: create .env locally, push it with"
 echo "    'rclone copyto .env $APP_REMOTE/.env', create the SQLite file with"
 echo "    'rclone rcat $APP_REMOTE/database/database.sqlite </dev/null', then run:"
 echo "      php ~/helio/mapsedgemedia-app/artisan migrate --force"
-echo "    (skip storage:link — this app doesn't use the public storage"
+echo "    (skip storage:link, this app doesn't use the public storage"
 echo "    disk, and symlink() fails over the WebDAV mount anyway)"

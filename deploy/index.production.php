@@ -13,7 +13,7 @@
 //                                  assets live here
 //
 // This exists because we can't rely on the host serving this Laravel app's
-// own public/ folder as the docroot (see deploy/README.md for why) — so
+// own public/ folder as the docroot (see deploy/README.md for why), so
 // instead, only the actual public/ folder's *contents* are copied into
 // whatever the host serves by default, and the app root is renamed to
 // point at the sibling app directory instead of "..".

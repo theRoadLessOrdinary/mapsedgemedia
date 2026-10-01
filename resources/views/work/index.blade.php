@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Work')
-@section('description', 'Case studies — process, decisions, and outcomes behind real and sample projects.')
+@section('description', 'Case studies: process, decisions, and outcomes behind real and sample projects.')
 
 @section('content')
     <section class="max-w-5xl mx-auto px-6 pt-20 pb-4">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Home')
-@section('description', 'William Morris — UI/UX-focused developer. Case studies, real product work, and process.')
+@section('description', 'William Morris, UI/UX-focused developer. Case studies, real product work, and process.')
 
 @section('content')
     <section class="max-w-5xl mx-auto px-6 pt-20 pb-16">

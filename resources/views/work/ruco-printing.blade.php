@@ -6,10 +6,6 @@
 @section('content')
     <article class="max-w-3xl mx-auto px-6 pt-20 pb-24">
 
-        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium uppercase tracking-wide border border-amber-300 bg-amber-50 text-amber-800">
-            Draft, open questions marked inline
-        </span>
-
         <h1 class="mt-6 text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900">
             {{ $caseStudy['title'] }}
         </h1>
@@ -24,7 +20,7 @@
             </div>
             <div>
                 <dt class="text-slate-500 uppercase tracking-wide text-xs">Timeline</dt>
-                <dd class="mt-1 text-slate-900 font-medium">?</dd>
+                <dd class="mt-1 text-slate-900 font-medium">Oct 2025 - Jun 2026</dd>
             </div>
             <div>
                 <dt class="text-slate-500 uppercase tracking-wide text-xs">Team</dt>
@@ -35,14 +31,6 @@
                 <dd class="mt-1 text-slate-900 font-medium">Classic ASP, JavaScript</dd>
             </div>
         </dl>
-
-        <div class="mt-4 p-4 rounded-lg border border-amber-300 bg-amber-50">
-            <p class="text-sm font-medium text-amber-800">Question for you</p>
-            <p class="mt-1 text-sm text-amber-800 leading-relaxed">
-                Is this the same engagement/timeframe as the document library piece, or a separate
-                stint? Filled in "Solo" and the tools but left Timeline blank above.
-            </p>
-        </div>
 
         {{-- The problem --}}
         <section class="mt-14">
@@ -65,14 +53,6 @@
             </p>
         </section>
 
-        <div class="mt-6 p-4 rounded-lg border border-amber-300 bg-amber-50">
-            <p class="text-sm font-medium text-amber-800">Question for you</p>
-            <p class="mt-1 text-sm text-amber-800 leading-relaxed">
-                Worth naming a real timeframe for the IE mode sunset here to make the urgency
-                concrete, if you have one you're comfortable citing? Left it generic for now.
-            </p>
-        </div>
-
         {{-- Process --}}
         <section class="mt-14">
             <h2 class="text-xl font-semibold text-slate-900">Process</h2>
@@ -85,7 +65,7 @@
             <p class="mt-6 text-slate-700 leading-relaxed">
                 Rewriting this properly, dropping ActiveX and printing the document directly, meant
                 finding and updating every print button and link across the app first. There were
-                dozens, built up over years, with no consistent markup to search for reliably in one
+                easily two dozen, built up over years, with no consistent markup to search for reliably in one
                 pass. Fixing them one at a time also meant the app would be half-working for however
                 long the rollout took: some pages fixed, most not.
             </p>
@@ -102,22 +82,15 @@
                 <li>It opens that URL directly in a new window, letting the browser print it natively. ActiveX never runs.</li>
             </ol>
             <p class="mt-6 text-slate-700 leading-relaxed">
-                Deployment skipped the dozens-of-pages problem entirely: the script was injected at
+                Opening the window after an async request can trip popup blockers in a general
+                browser setting, but that wasn't a factor in RUCO's environment.
+            </p>
+            <p class="mt-6 text-slate-700 leading-relaxed">
+                Deployment skipped the page-by-page problem entirely: the script was injected at
                 the top of every Classic ASP page by the web server itself, so it went live
                 everywhere in the app the moment it shipped, with nothing to roll out page by page.
             </p>
         </section>
-
-        <div class="mt-6 p-4 rounded-lg border border-amber-300 bg-amber-50">
-            <p class="text-sm font-medium text-amber-800">Question for you</p>
-            <p class="mt-1 text-sm text-amber-800 leading-relaxed">
-                Since the new window opens after an async <code>fetch()</code> resolves, rather than
-                synchronously inside the click handler, did you run into popup blockers? A common
-                workaround is opening a blank window immediately on click, then setting its
-                <code>location</code> once the fetch resolves. Is that what happened here, or
-                did it just work without one?
-            </p>
-        </div>
 
         {{-- Key decisions --}}
         <section class="mt-14">
@@ -129,7 +102,7 @@
                 </li>
                 <li>
                     <p class="font-medium text-slate-900">Intercept at the click, not at every page.</p>
-                    <p class="mt-2 text-slate-700 leading-relaxed">Hijacking the click event client-side meant never having to find and edit each of the dozens of print entry points individually.</p>
+                    <p class="mt-2 text-slate-700 leading-relaxed">Hijacking the click event client-side meant never having to find and edit each of the two dozen-plus print entry points individually.</p>
                 </li>
                 <li>
                     <p class="font-medium text-slate-900">Deploy through the server, not the app.</p>
@@ -143,21 +116,13 @@
             <h2 class="text-xl font-semibold text-slate-900">Outcome</h2>
             <p class="mt-6 text-slate-700 leading-relaxed">
                 The app's printing stopped depending on Edge's IE compatibility mode, sitewide, in a
-                single deploy, with zero changes to any individual print button or page. The
+                single deploy, with zero changes to any of the two dozen-plus print buttons and
+                pages. The ActiveX control was then removed from the app completely. The
                 underlying business logic, inventory updates and notifications, kept working
                 exactly as it had before, since the fix reused the same request rather than
                 replacing it.
             </p>
         </section>
-
-        <div class="mt-6 p-4 rounded-lg border border-amber-300 bg-amber-50">
-            <p class="text-sm font-medium text-amber-800">Question for you</p>
-            <p class="mt-1 text-sm text-amber-800 leading-relaxed">
-                Two things worth having if you've got them: a rough count of how many print
-                buttons/pages this replaced (to make "dozens" concrete), and whether the ActiveX
-                control itself was fully removed afterward or just stopped being invoked.
-            </p>
-        </div>
 
         <div class="pt-8 border-t border-slate-200">
             <a href="{{ route('work') }}" class="text-sm font-medium text-indigo-800 hover:underline">&larr; Back to case studies</a>
